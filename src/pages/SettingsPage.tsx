@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { Save } from 'lucide-react';
 import Card from '../components/Card';

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { CalendarClock, User as UserIcon, MessageCircle, Search as SearchIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import Card from '../components/Card';
 import { format, isToday } from 'date-fns';

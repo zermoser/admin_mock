@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import { User, Mail, Search, CalendarClock, Tag } from 'lucide-react';
-import Card from '../components/Card'; // Card เป็น light-only styling
+import { useState, useMemo } from 'react';
+import { User, Mail, Search, CalendarClock, Tag, Edit2, Trash2 } from 'lucide-react';
+import Card from '../components/Card';
 
 // mock data
 interface MockUser {
@@ -10,6 +10,13 @@ interface MockUser {
   role: string;
   joinedAt: string;
 }
+
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+};
 
 const MOCK_USERS: MockUser[] = Array.from({ length: 25 }).map((_, idx) => ({
   id: idx + 1,
@@ -96,53 +103,71 @@ export default function UsersPage() {
       </div>
 
       {/* Desktop: Table */}
-      <div className="hidden sm:block overflow-x-auto bg-white rounded-2xl shadow-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined At</th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filtered.map(user => (
-              <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{user.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap flex items-center space-x-3">
-                  <div className="flex-shrink-0 h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">
-                    <User size={16} className="text-gray-500" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-800 truncate">{user.name}</span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 flex items-center space-x-1">
-                  <Mail size={16} className="text-gray-500" />
-                  <span className="truncate">{user.email}</span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{user.role}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {new Date(user.joinedAt).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-center">
-                  <div className="inline-flex space-x-2">
-                    <button className="px-2 py-1 bg-green-500 text-white rounded-lg text-xs hover:bg-green-600 transition">Edit</button>
-                    <button className="px-2 py-1 bg-red-500 text-white rounded-lg text-xs hover:bg-red-600 transition">Delete</button>
-                  </div>
-                </td>
+      <div className="hidden sm:block bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="max-h-[60vh] overflow-y-auto">
+          <table className="min-w-full table-auto">
+            <thead className="sticky top-0 bg-gray-50 z-20">
+              <tr className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3">ID</th>
+                <th className="px-6 py-3">Name</th>
+                <th className="px-6 py-3">Email</th>
+                <th className="px-6 py-3">Role</th>
+                <th className="px-6 py-3">Joined At</th>
+                <th className="px-6 py-3 text-center">Actions</th>
               </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No users found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.length > 0 ? (
+                filtered.map(user => (
+                  <tr
+                    key={user.id}
+                    className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition-shadow"
+                  >
+                    <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{user.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center space-x-3">
+                        <div className="h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">
+                          <User size={16} className="text-gray-500" />
+                        </div>
+                        <span className="font-medium text-gray-800 truncate">{user.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center space-x-2 text-sm text-gray-700">
+                        <Mail size={16} className="text-gray-500" />
+                        <span className="truncate">{user.email}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{user.role}</td>
+                    <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{new Date(user.joinedAt).toLocaleDateString('en-US', dateOptions)}</td>
+                    <td className="px-6 py-4 text-sm text-gray-700 text-center whitespace-nowrap">
+                      <div className="flex justify-center items-center space-x-2">
+                        <button
+                          className="p-2 hover:bg-green-100 rounded-lg transition"
+                          title="Edit"
+                          aria-label="Edit user"
+                        >
+                          <Edit2 size={14} className="text-green-600" />
+                        </button>
+                        <button
+                          className="p-2 hover:bg-red-100 rounded-lg transition"
+                          title="Delete"
+                          aria-label="Delete user"
+                        >
+                          <Trash2 size={14} className="text-red-600" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">No users found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
