@@ -69,26 +69,6 @@ export default function App() {
 
           {/* Search + actions */}
           <div className="flex items-center space-x-4">
-            {/* Desktop search input */}
-            <div className="hidden md:flex relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="block w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-white"
-              />
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-            </div>
-            {/* Mobile search icon */}
-            <button
-              className="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
-              onClick={() => setShowMobileSearch((prev) => !prev)}
-              aria-label="Search"
-            >
-              <SearchIcon size={20} />
-            </button>
-
             {/* Notification */}
             <button className="relative text-gray-500 hover:text-gray-700 focus:outline-none">
               <Bell size={20} />

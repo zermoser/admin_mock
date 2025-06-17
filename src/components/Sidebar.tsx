@@ -115,7 +115,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
             <img
               src="https://zermoser.github.io/assets/images/MosProfile.jpg"
               alt="avatar"
-              className="h-8 w-8 rounded-full object-cover"
+              className="h-8 w-8 rounded-full mx-auto"
             />
           )}
         </div>
