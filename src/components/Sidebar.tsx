@@ -102,9 +102,9 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           {!collapsed ? (
             <div className="flex items-center space-x-2">
               <img
-                src="https://i.pravatar.cc/32"
+                src="https://zermoser.github.io/assets/images/MosProfile.jpg"
                 alt="avatar"
-                className="h-8 w-8 rounded-full"
+                className="h-8 w-8 rounded-full object-cover"
               />
               <div className="truncate">
                 <p className="text-gray-800 text-sm font-medium">Mos Admin</p>
@@ -113,9 +113,9 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
             </div>
           ) : (
             <img
-              src="https://i.pravatar.cc/32"
+              src="https://zermoser.github.io/assets/images/MosProfile.jpg"
               alt="avatar"
-              className="h-8 w-8 rounded-full mx-auto"
+              className="h-8 w-8 rounded-full object-cover"
             />
           )}
         </div>

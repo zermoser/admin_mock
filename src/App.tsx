@@ -102,7 +102,7 @@ export default function App() {
                   <Menu.Button className="flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full">
                     <img
                       className="h-8 w-8 rounded-full object-cover"
-                      src="https://i.pravatar.cc/32"
+                      src="https://zermoser.github.io/assets/images/MosProfile.jpg"
                       alt="User avatar"
                     />
                     <ChevronDown
