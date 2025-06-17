@@ -19,16 +19,21 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay for mobile */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden transition-opacity ${sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden transition-opacity ${
+          sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
         onClick={() => setSidebarOpen(false)}
       ></div>
-      <div className={`fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-30 transform md:translate-x-0 transition-transform ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}>
+
+      <div
+        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-30 transform md:translate-x-0 transition-transform ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
         <div className="flex items-center justify-center h-16 bg-blue-600">
-          <span className="text-white text-lg font-semibold">Admin</span>
+          <span className="text-white text-lg font-semibold">Admin Panel</span>
         </div>
         <nav className="mt-4">
           {links.map((link) => {
@@ -37,7 +42,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-100 ${
+                className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-100 transition ${
                   active ? 'bg-blue-200 font-semibold' : ''
                 }`}
                 onClick={() => setSidebarOpen(false)}
